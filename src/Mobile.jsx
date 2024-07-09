@@ -9,9 +9,8 @@ const Mobile = () => {
 
   useEffect(() => {
     setIsMobile(isMobileDevice());
-    console.log(isMobile);
-  }, []);
-
+  }, []); 
+  
   return (
     <div>
       {isMobile ? (
