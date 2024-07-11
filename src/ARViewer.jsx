@@ -8,7 +8,6 @@ import "../src/App.css"
 
 const ARViewer = () => {
   const viewerRef = useRef(null);
-  const [capturedImage, setCapturedImage] = useState(null);
   const [fullscreen, setfullscreen] = useState(false);
 
   // const handleFullScreen = () => {
@@ -52,7 +51,6 @@ const ARViewer = () => {
   const handleCaptureImage = () => {
     if (viewerRef.current) {
       const imgDataUrl = viewerRef.current.toDataURL();
-      setCapturedImage(imgDataUrl);
 
       const link = document.createElement('a');
       link.href = imgDataUrl;
@@ -62,7 +60,6 @@ const ARViewer = () => {
       link.click();
 
       document.body.removeChild(link);
-      setCapturedImage(null);
     }
   };
 
