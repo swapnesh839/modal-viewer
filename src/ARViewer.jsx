@@ -99,7 +99,7 @@ const ARViewer = () => {
       environment-image={hdri}
       alt="AR Model"
     >
-      <img className='position-absolute top-0 start-0 z-3 bg-dark-subtle rounded px-2' alt='logo' src={logo} width={100} />
+      <img className='position-absolute top-0 start-0 z-3 mt-2 ms-2 bg-dark-subtle rounded px-2' alt='logo' src={logo} width={100} />
       <div className='position-absolute end-0 top-50 rounded d-flex flex-column translate-middle z-3 bg-dark-subtle'>
         <span
           className='m-1 p-1 border rounded-2 pointer'
