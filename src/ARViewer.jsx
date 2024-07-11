@@ -96,7 +96,7 @@ const ARViewer = () => {
       // bounds="tight"
       bounds="auto"
       // skybox-image={hdri}
-      // environment-image={hdri}
+      environment-image={hdri}
       alt="AR Model"
     >
       <img className='position-absolute top-0 start-0 z-3 mt-2 ms-2 bg-dark-subtle rounded px-2' alt='logo' src={logo} width={100} />
@@ -120,11 +120,11 @@ const ARViewer = () => {
           <Forward />
         </span>
       </div>
-      {/* <model-viewer-lights
+      <model-viewer-lights
         shadow-intensity="2"
         environment-image={hdri}
         shadow-softness="0.55"
-      /> */}
+      />
       <button slot="ar-button" className='position-absolute px-4 border py-2 border-2 shadow z-3 rounded pointer bottom-0 start-50 translate-middle'>
         <Box/> AR View
       </button>
