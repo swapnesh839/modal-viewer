@@ -43,6 +43,7 @@
 
 import '@google/model-viewer';
 import model from "../src/Roses.glb";
+import modelios from "../src/Roses.usdz";
 
 const ARViewer = () => {
   return (
@@ -59,6 +60,7 @@ const ARViewer = () => {
       touch-action="pan-y"
       poster="/public/logo192.png"
       src={model}
+      ios-src={modelios}
       auto-rotate
       style={{ width: '100%', height: '100vh' }}
       // exposure="1.7"
