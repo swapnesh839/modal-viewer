@@ -3,18 +3,13 @@ import '@google/model-viewer';
 import model from "../src/Roses.glb";
 import modelios from "../src/Roses.usdz";
 import logo from "../src/hdr/Logo.png"
+import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box, Camera, Forward, Fullscreen, Minimize } from 'lucide-react';
 import "../src/App.css"
 
 const ARViewer = () => {
   const viewerRef = useRef(null);
   const [fullscreen, setfullscreen] = useState(false);
-
-  // const handleFullScreen = () => {
-  //   if (viewerRef.current) {
-  //     viewerRef.current.requestFullscreen();
-  //   }
-  // };
 
   const handleFullScreen = () => {
     setfullscreen(i => !i)
@@ -100,11 +95,11 @@ const ARViewer = () => {
       min-field-of-view="10deg"
       // bounds="tight"
       bounds="auto"
-      // skybox-image="/src/hdr/illovo_beach_balcony_4k.hdr"
-      // environment-image="/src/hdr/illovo_beach_balcony_4k.hdr"
+      // skybox-image={hdri}
+      environment-image={hdri}
       alt="AR Model"
     >
-      <img className='position-absolute top-0 start-0 z-3' alt='logo' src={logo} width={200} />
+      <img className='position-absolute top-0 start-0 z-3 bg-dark-subtle rounded px-2' alt='logo' src={logo} width={100} />
       <div className='position-absolute end-0 top-50 rounded d-flex flex-column translate-middle z-3 bg-dark-subtle'>
         <span
           className='m-1 p-1 border rounded-2 pointer'
@@ -126,13 +121,19 @@ const ARViewer = () => {
         </span>
       </div>
       <model-viewer-lights
-        shadow-intensity="1"
-        environment-image="/src/hdr/illovo_beach_balcony_4k.hdr"
+        shadow-intensity="2"
+        environment-image={hdri}
         shadow-softness="0.55"
       />
-      <button slot="ar-button" className='pointer position-absolute bottom-0 start-50 bg-black '>
-      <Box /> AR 
+      <button slot="ar-button" className='position-absolute px-4 border py-2 border-2 shadow z-3 rounded pointer bottom-0 start-50 translate-middle'>
+        <Box/> AR View
       </button>
+      <button className='position-absolute px-4 border py-2 border-2 shadow rounded pointer bottom-0 start-50 translate-middle'>
+        <Box/> AR View
+      </button>
+      {/* <span slot="ar-button" className='pointer position-absolute bottom-0 start-50 bg-black '>
+      <Box /> AR 
+      </span> */}
     </model-viewer>
   );
 };
