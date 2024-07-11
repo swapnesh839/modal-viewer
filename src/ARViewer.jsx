@@ -104,7 +104,7 @@ const ARViewer = () => {
       // environment-image="/src/hdr/illovo_beach_balcony_4k.hdr"
       alt="AR Model"
     >
-      <img className='position-absolute top-0 start-0 z-3' src={logo} width={200} />
+      <img className='position-absolute top-0 start-0 z-3' alt='logo' src={logo} width={200} />
       <div className='position-absolute end-0 top-50 rounded d-flex flex-column translate-middle z-3 bg-dark-subtle'>
         <span
           className='m-1 p-1 border rounded-2 pointer'
