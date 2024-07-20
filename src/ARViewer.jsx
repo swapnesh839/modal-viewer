@@ -13,7 +13,7 @@ const ARViewer = () => {
   const viewerRef = useRef(null);
   const [fullscreen, setfullscreen] = useState(false);
   const [open, setopen] = useState(false);
-  const [modelColor, setModelColor] = useState('#ffffff');
+  // const [modelColor, setModelColor] = useState('#ffffff');
 
   // const handleColorChange = (event) => {
   //   setModelColor(event.target.value);
