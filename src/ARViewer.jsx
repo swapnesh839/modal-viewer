@@ -1,7 +1,7 @@
 import React, { useRef, useState,useEffect } from 'react'
 import '@google/model-viewer';
-import model from "../src/Roses.glb";
-import modelios from "../src/Roses.usdz";
+// import model from "../src/Roses.glb";
+// import modelios from "../src/Roses.usdz";
 import basketball_shoe from "../src/basketball_shoe.glb";
 import basketball_shoeios from "../src/basketball_shoe.usdz";
 import logo from "../src/hdr/Logo.png"
@@ -15,9 +15,9 @@ const ARViewer = () => {
   const [open, setopen] = useState(false);
   const [modelColor, setModelColor] = useState('#ffffff');
 
-  const handleColorChange = (event) => {
-    setModelColor(event.target.value);
-  };
+  // const handleColorChange = (event) => {
+  //   setModelColor(event.target.value);
+  // };
 
   useEffect(() => {
     if (viewerRef.current) {
