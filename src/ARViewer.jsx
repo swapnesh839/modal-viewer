@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import '@google/model-viewer';
 import model from "../src/Roses.glb";
 import modelios from "../src/Roses.usdz";
+import basketball_shoe from "../src/basketball_shoe.glb";
+import basketball_shoeios from "../src/basketball_shoe.usdc";
 import logo from "../src/hdr/Logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box, Camera,Forward, Fullscreen, Minimize, X } from 'lucide-react';
@@ -11,7 +13,27 @@ const ARViewer = () => {
   const viewerRef = useRef(null);
   const [fullscreen, setfullscreen] = useState(false);
   const [open, setopen] = useState(false);
+  const [modelColor, setModelColor] = useState('#ffffff');
 
+  const handleColorChange = (event) => {
+    setModelColor(event.target.value);
+  };
+
+  useEffect(() => {
+    if (viewerRef.current) {
+      const modelViewer = viewerRef.current;
+
+      const updateMaterialColor = () => {
+        const materials = modelViewer?.model?.materials;
+        if (Array.isArray(materials)) {
+          if (materials.length > 0) {
+            materials[0].pbrMetallicRoughness.setBaseColorFactor(modelColor);
+          }
+        }
+      };
+      updateMaterialColor()
+    }
+  }, [modelColor]);
   const handleFullScreen = () => {
     setfullscreen(i => !i)
     if (viewerRef.current) {
@@ -65,6 +87,7 @@ const ARViewer = () => {
       id="color"
       ref={viewerRef}
       autoplay
+      
       ar
       ar-modes="webxr scene-viewer quick-look"
       // ar-scale="fixed"
@@ -74,8 +97,8 @@ const ARViewer = () => {
       camera-controls
       touch-action="pan-y"
       poster="/public/logo192.png"
-      src={model}
-      ios-src={modelios} // ios src
+      src={basketball_shoe}
+      ios-src={basketball_shoeios} // ios src
       auto-rotate
       style={{ width: '100%', height: '100vh' }}
       // exposure="1.7"
@@ -98,7 +121,7 @@ const ARViewer = () => {
       // bounds="tight"
       bounds="auto"
       // skybox-image={hdri}
-      environment-image={hdri}
+      // environment-image={hdri}
       alt="AR Model"
     >
       <img className='position-absolute top-0 start-0 z-3 mt-2 ms-2 bg-dark-subtle rounded px-2' alt='logo' src={logo} width={100} />
@@ -146,6 +169,13 @@ const ARViewer = () => {
       {/* <span slot="ar-button" className='pointer position-absolute bottom-0 start-50 bg-black '>
       <Box /> AR 
       </span> */}
+       <input
+        type="color"
+        value={modelColor}
+        onChange={handleColorChange}
+        style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
+      />
+
     </model-viewer>
   );
 };
