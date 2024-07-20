@@ -1,4 +1,4 @@
-import React, { useRef, useState,useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import '@google/model-viewer';
 import basketball_shoe from "../src/basketball_shoe.glb";
 import basketball_shoeios from "../src/basketball_shoe.usdz";
