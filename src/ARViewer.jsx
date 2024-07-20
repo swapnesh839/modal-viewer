@@ -1,7 +1,5 @@
 import React, { useRef, useState,useEffect } from 'react'
 import '@google/model-viewer';
-// import model from "../src/Roses.glb";
-// import modelios from "../src/Roses.usdz";
 import basketball_shoe from "../src/basketball_shoe.glb";
 import basketball_shoeios from "../src/basketball_shoe.usdz";
 import logo from "../src/hdr/Logo.png"
@@ -13,27 +11,6 @@ const ARViewer = () => {
   const viewerRef = useRef(null);
   const [fullscreen, setfullscreen] = useState(false);
   const [open, setopen] = useState(false);
-  // const [modelColor, setModelColor] = useState('#ffffff');
-
-  // const handleColorChange = (event) => {
-  //   setModelColor(event.target.value);
-  // };
-
-  useEffect(() => {
-    if (viewerRef.current) {
-      const modelViewer = viewerRef.current;
-
-      const updateMaterialColor = () => {
-        const materials = modelViewer?.model?.materials;
-        if (Array.isArray(materials)) {
-          if (materials.length > 0) {
-            materials[0].pbrMetallicRoughness.setBaseColorFactor(modelColor);
-          }
-        }
-      };
-      updateMaterialColor()
-    }
-  }, [modelColor]);
   const handleFullScreen = () => {
     setfullscreen(i => !i)
     if (viewerRef.current) {
