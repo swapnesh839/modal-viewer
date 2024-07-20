@@ -3,7 +3,7 @@ import '@google/model-viewer';
 import model from "../src/Roses.glb";
 import modelios from "../src/Roses.usdz";
 import basketball_shoe from "../src/basketball_shoe.glb";
-import basketball_shoeios from "../src/basketball_shoe.usdc";
+import basketball_shoeios from "../src/basketball_shoe.usdz";
 import logo from "../src/hdr/Logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box, Camera,Forward, Fullscreen, Minimize, X } from 'lucide-react';
@@ -169,12 +169,12 @@ const ARViewer = () => {
       {/* <span slot="ar-button" className='pointer position-absolute bottom-0 start-50 bg-black '>
       <Box /> AR 
       </span> */}
-       <input
+       {/* <input
         type="color"
         value={modelColor}
         onChange={handleColorChange}
         style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
-      />
+      /> */}
 
     </model-viewer>
   );
