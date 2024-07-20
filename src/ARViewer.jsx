@@ -140,19 +140,6 @@ const ARViewer = () => {
       <button slot="ar-button" className='position-absolute btn-16 px-4 border py-2 border-2 shadow z-3 rounded pointer bottom-0 start-50 translate-middle'>
         <Box /> AR View
       </button>
-      <button className='position-absolute btn-16 px-4 border py-2 border-2 shadow rounded pointer bottom-0 start-50 translate-middle'>
-        <Box /> AR View
-      </button>
-      {/* <span slot="ar-button" className='pointer position-absolute bottom-0 start-50 bg-black '>
-      <Box /> AR 
-      </span> */}
-       {/* <input
-        type="color"
-        value={modelColor}
-        onChange={handleColorChange}
-        style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
-      /> */}
-
     </model-viewer>
   );
 };
