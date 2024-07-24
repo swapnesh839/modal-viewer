@@ -18,7 +18,7 @@ const Home = () => {
           backgroundRepeat: 'no-repeat',
           padding: '3rem',
         }}
-        className='p-3 text-white text-center d-flex justify-content-center flex-column align-items-center vh-100 w-100'>
+        className='p-3 text-white text-center d-flex justify-content-center flex-column align-items-center h-100 bg-black w-100'>
         {/* <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'><img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} /></a> */}
         <Typewriter
           options={{
