@@ -6,7 +6,6 @@ import logo from "../src/hdr/Logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box } from 'lucide-react';
 import "../src/App.css"
-import Loader from "./Loader.js"
 import { MoonLoader } from 'react-spinners';
 
 const ARViewer = () => {
