@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import '@google/model-viewer';
 import sneaker from "../src/sneaker.glb";
-import basketball_shoeios from "../src/basketball_shoe.usdz";
+import sneakerios from "../src/sneaker.usdz";
 import logo from "../src/hdr/Logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box } from 'lucide-react';
@@ -32,7 +32,7 @@ const ARViewer = () => {
       touch-action="pan-y"
       poster="/public/logo192.png"
       src={sneaker}
-      ios-src={basketball_shoeios}
+      ios-src={sneakerios}
       auto-rotate
       style={{ width: '100%', height: '100vh' }}
       shadow-softness="0"
@@ -47,7 +47,7 @@ const ARViewer = () => {
       min-field-of-view="10deg"
       bounds="auto"
       alt="AR Model"
-      scale=".5 .5 .5"
+      // scale=".5 .5 .5"
     >
       <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'><img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} /></a>
       <model-viewer-lights
