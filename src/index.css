@@ -6,43 +6,59 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .transition-element {
   transition: all 0.4s ease-in-out;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.bg6200ea {
+  background-color: #6200ea;
 }
 
-.btn-16 {
+.button3d {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #6200ea;
   border: none;
-  color: #000;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); */
+  transition: all 0.6s ease;
 }
-.btn-16:after {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 100%;
-  top: 0;
-  left: 0;
-  direction: rtl;
-  z-index: -1;
-  box-shadow:
-   -7px -7px 20px 0px #fff9,
-   -4px -4px 5px 0px #fff9,
-   7px 7px 20px 0px #0002,
-   4px 4px 5px 0px #0001;
-  transition: all 0.3s ease;
+
+.button3d:hover {
+  background-color: #3700b3 !important;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15) !important; */
+  outline: #3700b3 !important;
 }
-.btn-16:hover {
-  color: #000;
+
+@keyframes bipping-shadow {
+  0% {
+    box-shadow: 0 0 15px rgb(23, 21, 21);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgb(115, 43, 186);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgb(23, 21, 21);
+  }
 }
-.btn-16:hover:after {
-  left: auto;
-  right: 0;
-  width: 100%;
+
+.bipping-button {
+  background-color: #6200ea;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 20px 23px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: bipping-shadow .65s infinite;
 }
-.btn-16:active {
-  top: 2px;
+
+.bipping-button:hover {
+  background-color: #3700b3 !important;
 }
