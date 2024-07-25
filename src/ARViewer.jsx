@@ -36,7 +36,7 @@ const ARViewer = () => {
     return () => {
       viewerElement.removeEventListener('ar-status', handleARStatus);
     };
-  }, [viewerRef.current]);
+  }, []);
 
   return (
     loading ? <Loadingcomp /> : (
