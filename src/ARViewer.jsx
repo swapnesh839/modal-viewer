@@ -35,7 +35,7 @@ const ARViewer = () => {
           poster="/public/logo192.png"
           src={Eiffel_tower}
           ios-src={Eiffel_towerios}
-          auto-rotate
+          // auto-rotate
           style={{ width: '100%', height: '100vh' }}
           shadow-softness="0"
           tone-mapping="filmic"
