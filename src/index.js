@@ -13,7 +13,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ar" element={<ARViewer />} />
-        <Route path="*" element={<ARViewer />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
