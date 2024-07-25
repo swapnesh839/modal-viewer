@@ -11,7 +11,6 @@ import { MoonLoader } from 'react-spinners';
 const ARViewer = () => {
   const viewerRef = useRef(null);
   const [loading, setLoading] = useState(true);
-  const [isARMode, setIsARMode] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,28 +18,9 @@ const ARViewer = () => {
     }, 2000);
   }, []);
 
-  useEffect(() => {
-    if (!viewerRef.current) return;
-
-    const handleARStatus = (event) => {
-      if (event.detail.status === 'session-started') {
-        setIsARMode(true);
-      } else if (event.detail.status === 'session-ended') {
-        setIsARMode(false);
-      }
-    };
-
-    const viewerElement = viewerRef.current;
-    viewerElement.addEventListener('ar-status', handleARStatus);
-
-    return () => {
-      viewerElement.removeEventListener('ar-status', handleARStatus);
-    };
-  }, []);
 
   return (
     loading ? <Loadingcomp /> : (
-      <div>
         <model-viewer
           id="color"
           ref={viewerRef}
@@ -82,12 +62,6 @@ const ARViewer = () => {
             <Box /> Explore AR
           </button>
         </model-viewer>
-        {isARMode && (
-          <div id="ar-background-text" className="ar-text">
-            made by swapnesh
-          </div>
-        )}
-      </div>
     )
   );
 };
