@@ -1,73 +1,104 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import '@google/model-viewer';
-import sneaker from "../src/sneaker.glb";
-import sneakerios from "../src/sneaker.usdz";
-import logo from "../src/hdr/Logo.png"
-import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
+import Eiffel_tower from "../src/Eiffel_tower.glb";
+import Eiffel_towerios from "../src/Eiffel_tower.usdz";
+import logo from "../src/hdr/Logo.png";
+import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr";
 import { Box } from 'lucide-react';
-import "../src/App.css"
+import "../src/App.css";
 import { MoonLoader } from 'react-spinners';
 
 const ARViewer = () => {
   const viewerRef = useRef(null);
-  const [loading, setLoading] = React.useState(true)
-  useEffect(()=>{
-    setTimeout(()=>{
-      setLoading(false)
-    },2000)
-  },[])
+  const [loading, setLoading] = useState(true);
+  const [isARMode, setIsARMode] = useState(false);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  useEffect(() => {
+    if (!viewerRef.current) return;
+
+    const handleARStatus = (event) => {
+      if (event.detail.status === 'session-started') {
+        setIsARMode(true);
+      } else if (event.detail.status === 'session-ended') {
+        setIsARMode(false);
+      }
+    };
+
+    const viewerElement = viewerRef.current;
+    viewerElement.addEventListener('ar-status', handleARStatus);
+
+    return () => {
+      viewerElement.removeEventListener('ar-status', handleARStatus);
+    };
+  }, [viewerRef.current]);
 
   return (
-    loading ? <Loadingcomp /> : <model-viewer
-      id="color"
-      ref={viewerRef}
-      autoplay
-      ar
-      ar-modes="webxr scene-viewer quick-look"
-      camera-orbit="-30deg auto auto"
-      max-camera-orbit="auto 100deg auto"
-      shadow-intensity="2"
-      camera-controls
-      touch-action="pan-y"
-      poster="/public/logo192.png"
-      src={sneaker}
-      ios-src={sneakerios}
-      auto-rotate
-      style={{ width: '100%', height: '100vh' }}
-      shadow-softness="0"
-      tone-mapping="filmic"
-      class="container_div"
-      ar-status="presenting"
-      ar-placement="floor"
-      interaction-prompt="auto"
-      interaction-prompt-style="wiggle"
-      min-camera-orbit="auto 0deg auto"
-      max-field-of-view="45deg"
-      min-field-of-view="10deg"
-      bounds="auto"
-      alt="AR Model"
-      // scale=".5 .5 .5"
-    >
-      <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'><img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} /></a>
-      <model-viewer-lights
-        shadow-intensity="2"
-        environment-image={hdri}
-        shadow-softness="0.55"
-      />
-      <button slot="ar-button"
-        className='position-absolute bipping-button px-4 py-2 z-3 rounded pointer bottom-0 start-50 mb-4 translate-middle-x'>
-        <Box /> Explore AR
-      </button>
-    </model-viewer>
-  )
+    loading ? <Loadingcomp /> : (
+      <div>
+        <model-viewer
+          id="color"
+          ref={viewerRef}
+          autoplay
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-orbit="-30deg auto auto"
+          max-camera-orbit="auto 100deg auto"
+          shadow-intensity="2"
+          camera-controls
+          touch-action="pan-y"
+          poster="/public/logo192.png"
+          src={Eiffel_tower}
+          ios-src={Eiffel_towerios}
+          auto-rotate
+          style={{ width: '100%', height: '100vh' }}
+          shadow-softness="0"
+          tone-mapping="filmic"
+          class="container_div"
+          ar-placement="floor"
+          interaction-prompt="auto"
+          interaction-prompt-style="wiggle"
+          min-camera-orbit="auto 0deg auto"
+          max-field-of-view="45deg"
+          min-field-of-view="10deg"
+          bounds="auto"
+          alt="AR Model"
+        >
+          <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
+            <img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} />
+          </a>
+          <model-viewer-lights
+            shadow-intensity="2"
+            environment-image={hdri}
+            shadow-softness="0.55"
+          />
+          <button slot="ar-button"
+            className='position-absolute bipping-button px-4 py-2 z-3 rounded pointer bottom-0 start-50 mb-4 translate-middle-x'>
+            <Box /> Explore AR
+          </button>
+        </model-viewer>
+        {isARMode && (
+          <div id="ar-background-text" className="ar-text">
+            made by swapnesh
+          </div>
+        )}
+      </div>
+    )
+  );
 };
 
 export default ARViewer;
 
 const Loadingcomp = () => (
   <div className='vh-100 text-black d-flex justify-content-center align-items-center'>
-    <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'><img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} /></a>
+    <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
+      <img style={{ maxWidth: "180px" }} className='position-absolute pointer top-0 start-0 z-3 ms-2 rounded' alt='logo' src={logo} />
+    </a>
     <MoonLoader color="#6200ea" loading={true} size={150} />
   </div>
-)
+);
