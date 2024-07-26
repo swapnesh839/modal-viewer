@@ -3,6 +3,7 @@ import '@google/model-viewer';
 import Eiffel_tower from "../src/Eiffel_tower.glb";
 import Eiffel_towerios from "../src/Eiffel_tower.usdz";
 import logo from "../src/hdr/Logo.png"
+import logo2 from "../src/logo-paris.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box } from 'lucide-react';
 import "../src/App.css";
@@ -26,7 +27,8 @@ const ARViewer = () => {
         ref={viewerRef}
         autoplay
         ar
-        ar-modes="webxr scene-viewer quick-look"
+        // ar-modes="webxr scene-viewer quick-look"
+        ar-modes="scene-viewer quick-look"
         camera-orbit="-30deg auto auto"
         max-camera-orbit="auto 100deg auto"
         shadow-intensity="2"
@@ -52,6 +54,7 @@ const ARViewer = () => {
         <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
         <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
       </a>
+        <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 end-0 z-3 me-2 p-0 mt-1 rounded' alt='logo' src={logo2} />
         <model-viewer-lights
           shadow-intensity="2"
           environment-image={hdri}
@@ -59,7 +62,7 @@ const ARViewer = () => {
         />
         <button slot="ar-button"
           className='position-absolute bipping-button px-4 py-2 z-3 rounded pointer bottom-0 start-50 mb-4 translate-middle-x'>
-          <Box /> Explore AR
+          <Box /> AR View
         </button>
       </model-viewer>
     )
@@ -73,6 +76,7 @@ const Loadingcomp = () => (
     <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
         <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
       </a>
+      <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 end-0 z-3 me-2 p-0 mt-1 rounded' alt='logo' src={logo2} />
     <MoonLoader color="#6200ea" loading={true} size={150} />
   </div>
 );

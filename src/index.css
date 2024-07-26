@@ -52,11 +52,12 @@ body {
   background-color: #6200ea;
   color: #fff;
   border: none;
-  border-radius: 50%;
+  /* border-radius:25px; */
   padding: 20px 23px;
   font-size: 16px;
   cursor: pointer;
   animation: bipping-shadow .65s infinite;
+  border-radius:50%;
 }
 
 .bipping-button:hover {
@@ -66,4 +67,8 @@ body {
 
 model-viewer {
   background-color: #4d5254; /* Change to your desired color */
+}
+
+#wishingtext {
+  text-shadow: 2px 2px 4px #984C1B;
 }
