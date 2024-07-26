@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@google/model-viewer';
-import sneaker from "../src/Eiffel_tower.glb";
-import sneakerios from "../src/Eiffel_tower.usdz";
+import Eiffel_tower from "../src/Eiffel_tower.glb";
+import Eiffel_towerios from "../src/Eiffel_tower.usdz";
 import logo from "../src/hdr/Logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box } from 'lucide-react';
