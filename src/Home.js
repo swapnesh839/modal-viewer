@@ -8,7 +8,9 @@ const Home = () => {
   const Location = useNavigate()
   return (
     <div className='vh-100 text-black '>
-      <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'><img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} /></a>
+      <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
+        <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
+      </a>
       <div
         style={{
           fontSize: '50px',

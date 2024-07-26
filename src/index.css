@@ -62,3 +62,8 @@ body {
 .bipping-button:hover {
   background-color: #3700b3 !important;
 }
+
+
+model-viewer {
+  background-color: #4d5254; /* Change to your desired color */
+}
