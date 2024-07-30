@@ -1,45 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@google/model-viewer';
+import * as THREE from 'three';
 import sneaker from "../src/lamborghini_huracan_twin_turbo_lost.glb";
 import sneakerios from "../src/Lamborghini_Huracan_Twin_Turbo_LOST.usdz";
-import logo from "../src/logo.png"
-import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
-import { Box } from 'lucide-react';
+import logo from "../src/logo.png";
+import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr";
 import "../src/App.css";
 import { MoonLoader } from 'react-spinners';
+import { Box } from 'lucide-react';
 
 const ARViewer = () => {
   const viewerRef = useRef(null);
   const [loading, setLoading] = useState(true);
-  const [color, setcolor] = useState("#D9008D");
-
-  useEffect(() => {
-    const viewer = viewerRef.current;
-    const handleLoad = () => {
-      if (viewer && viewer.model) {
-        const materials = viewer.model.materials;
-        if (materials && materials.length > 0) {
-          console.log("Materials loaded:", materials);
-          materials[0].pbrMetallicRoughness.setBaseColorFactor(color);
-          console.log("Color set to:", color);
-        } else {
-          console.log("Materials not found");
-        }
-      } else {
-        console.log("Model not found");
-      }
-    };
-
-    if (viewer) {
-      viewer.addEventListener('load', handleLoad);
-    }
-
-    return () => {
-      if (viewer) {
-        viewer.removeEventListener('load', handleLoad);
-      }
-    };
-  }, [color]);
+  const [dimensions, setDimensions] = useState({ width: 1, height: 1, depth: 1 });
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,6 +20,52 @@ const ARViewer = () => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    const fetchDimensions = () => {
+      if (viewerRef.current) {
+        const modelViewer = viewerRef.current;
+        const scene = modelViewer.scene;
+        if (scene && scene.model) {
+          const boundingBox = new THREE.Box3().setFromObject(scene.model);
+          const size = boundingBox.getSize(new THREE.Vector3());
+          setDimensions({ width: size.x, height: size.y, depth: size.z });
+        }
+      }
+    };
+
+    if (!loading) {
+      fetchDimensions();
+      const observer = new MutationObserver(fetchDimensions);
+      observer.observe(viewerRef.current, { attributes: true, childList: true, subtree: true });
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [loading]);
+
+  const generateCubeHotspots = (height, width, depth) => {
+    const positions = [
+      { slot: "hotspot-dot+X+Y+Z", pos: [width / 2, height / 2, depth / 2], normal: [1, 0, 0] },
+      { slot: "hotspot-dot-X+Y+Z", pos: [-width / 2, height / 2, depth / 2], normal: [-1, 0, 0] },
+      { slot: "hotspot-dot+X-Y+Z", pos: [width / 2, -height / 2, depth / 2], normal: [1, 0, 0] },
+      { slot: "hotspot-dot-X-Y+Z", pos: [-width / 2, -height / 2, depth / 2], normal: [-1, 0, 0] },
+      { slot: "hotspot-dot+X+Y-Z", pos: [width / 2, height / 2, -depth / 2], normal: [1, 0, 0] },
+      { slot: "hotspot-dot-X+Y-Z", pos: [-width / 2, height / 2, -depth / 2], normal: [-1, 0, 0] },
+      { slot: "hotspot-dot+X-Y-Z", pos: [width / 2, -height / 2, -depth / 2], normal: [1, 0, 0] },
+      { slot: "hotspot-dot-X-Y-Z", pos: [-width / 2, -height / 2, -depth / 2], normal: [-1, 0, 0] }
+    ];
+
+    return positions.map(({ slot, pos, normal }) => (
+      <div
+        key={slot}
+        slot={slot}
+        className="dot"
+        data-position={pos.join(' ')}
+        data-normal={normal.join(' ')}
+      ></div>
+    ));
+  };
 
   return (
     loading ? <Loadingcomp /> : (
@@ -68,7 +87,7 @@ const ARViewer = () => {
         style={{ width: '100%', height: '100vh' }}
         shadow-softness="0"
         tone-mapping="filmic"
-        class="container_div"
+        className="container_div"
         ar-placement="floor"
         interaction-prompt="auto"
         interaction-prompt-style="wiggle"
@@ -86,13 +105,15 @@ const ARViewer = () => {
           environment-image={hdri}
           shadow-softness="0.55"
         />
-        {/* <button slot="ar-button"
+        <button slot="ar-button"
           className='position-absolute bipping-button px-4 py-2 z-3 rounded pointer bottom-0 start-50 mb-4 translate-middle-x'>
           <Box /> Explore AR
-        </button> */}
-        <div
-          className='position-absolute px-4 py-2 z-3 rounded pointer top-0 start-50 mt-1 translate-middle-x flex'>
-          <span onClick={() => setcolor("#ffffff")}>red</span>
+        </button>
+        {generateCubeHotspots(dimensions.height, dimensions.width, dimensions.depth)}
+        <div className="position-absolute text-light top-0 end-0 p-2">
+          <p>Width: {dimensions.width.toFixed(2)} m</p>
+          <p>Height: {dimensions.height.toFixed(2)} m</p>
+          <p>Depth: {dimensions.depth.toFixed(2)} m</p>
         </div>
       </model-viewer>
     )
