@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@google/model-viewer';
-import sneaker from "../src/Eiffel_tower.glb";
-import sneakerios from "../src/Eiffel_tower.usdz";
-import logo from "../src/hdr/Logo.png"
+import sneaker from "../src/lamborghini_huracan_twin_turbo_lost.glb";
+import sneakerios from "../src/Lamborghini_Huracan_Twin_Turbo_LOST.usdz";
+import logo from "../src/logo.png"
 import hdri from "../src/hdr/illovo_beach_balcony_4k.hdr"
 import { Box } from 'lucide-react';
 import "../src/App.css";
@@ -11,6 +11,35 @@ import { MoonLoader } from 'react-spinners';
 const ARViewer = () => {
   const viewerRef = useRef(null);
   const [loading, setLoading] = useState(true);
+  const [color, setcolor] = useState("#D9008D");
+
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    const handleLoad = () => {
+      if (viewer && viewer.model) {
+        const materials = viewer.model.materials;
+        if (materials && materials.length > 0) {
+          console.log("Materials loaded:", materials);
+          materials[0].pbrMetallicRoughness.setBaseColorFactor(color);
+          console.log("Color set to:", color);
+        } else {
+          console.log("Materials not found");
+        }
+      } else {
+        console.log("Model not found");
+      }
+    };
+
+    if (viewer) {
+      viewer.addEventListener('load', handleLoad);
+    }
+
+    return () => {
+      if (viewer) {
+        viewer.removeEventListener('load', handleLoad);
+      }
+    };
+  }, [color]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,8 +62,8 @@ const ARViewer = () => {
         camera-controls
         touch-action="pan-y"
         poster="/public/logo192.png"
-        src={Eiffel_tower}
-        ios-src={Eiffel_towerios}
+        src={sneaker}
+        ios-src={sneakerios}
         // auto-rotate
         style={{ width: '100%', height: '100vh' }}
         shadow-softness="0"
@@ -50,17 +79,21 @@ const ARViewer = () => {
         alt="AR Model"
       >
         <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
-        <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
-      </a>
+          <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
+        </a>
         <model-viewer-lights
           shadow-intensity="2"
           environment-image={hdri}
           shadow-softness="0.55"
         />
-        <button slot="ar-button"
+        {/* <button slot="ar-button"
           className='position-absolute bipping-button px-4 py-2 z-3 rounded pointer bottom-0 start-50 mb-4 translate-middle-x'>
           <Box /> Explore AR
-        </button>
+        </button> */}
+        <div
+          className='position-absolute px-4 py-2 z-3 rounded pointer top-0 start-50 mt-1 translate-middle-x flex'>
+          <span onClick={() => setcolor("#ffffff")}>red</span>
+        </div>
       </model-viewer>
     )
   );
@@ -69,10 +102,10 @@ const ARViewer = () => {
 export default ARViewer;
 
 const Loadingcomp = () => (
-  <div style={{backgroundColor:"#4d5254"}} className='vh-100 text-black d-flex justify-content-center align-items-center'>
+  <div className='vh-100 text-black d-flex justify-content-center align-items-center'>
     <a href="https://realitiqxr.com/" rel="noreferrer" target='_blank'>
-        <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark-subtle pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
-      </a>
+      <img style={{ maxWidth: "120px" }} className='position-absolute bg-dark pointer top-0 start-0 z-3 ms-2 p-0 mt-1 rounded' alt='logo' src={logo} />
+    </a>
     <MoonLoader color="#6200ea" loading={true} size={150} />
   </div>
 );
